@@ -4,35 +4,46 @@
     <title>WEB1-JAVASCRIPT</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1><a href="index.html">WEB</a></h1>
-    <input type="button" value="night" onclick="
-      var target = document.querySelector('body');
-      if (this.value === 'night'){
-        target.style.backgroundColor='black';
-        target.style.color='white';
-        this.value='day';
-
+    <script>
+      function LInkSetColor(color){
         var alist = document.querySelectorAll('a');
         var i = 0;
         while (i < alist.length){
-          alist[i].style.color = 'powderblue';
-          i++;
-        }
-      } else {
-        target.style.backgroundColor='white';
-        target.style.color='black';
-        this.value='night';
-
-        var alist = document.querySelectorAll('a');
-        var i = 0;
-        while (i < alist.length){
-          alist[i].style.color = 'blue';
+          alist[i].style.color = color;
           i++;
         }
       }
-    ">
+
+      function BodySetColor(target, color){
+        target.style.color=color;
+      }
+
+      function BodySetBackgroundColor(target, color){
+        target.style.backgroundColor=color;
+      }
+
+      function nightDayHandler(self){
+        var target = document.querySelector('body');
+        if (self.value === 'night'){
+          BodySetBackgroundColor(target, 'black');
+          BodySetColor(target, 'white');
+          self.value='day';
+
+          LInkSetColor('powderblue');
+
+        } else {
+          BodySetBackgroundColor(target, 'white');
+          BodySetColor(target, 'black');
+          self.value='night';
+
+          LInkSetColor('blue');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1><a href="index.html">WEB</a></h1>
+    <input type="button" value="night" onclick="nightDayHandler(this);">
     <div id="grid">
       <ol>
         <li><a href="1.html">HTML</a></li>
