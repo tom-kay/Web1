@@ -3,13 +3,12 @@
   <head>
     <title>WEB1-Welcome</title>
     <meta charset="utf-8">
+    <script src="fetch/fetch.js"></script>
   </head>
   <body>
-    <h1><a href="index.html">WEB</a></h1>
-    <ol>
-      <li><a onclick="fetchPage('html.txt')">HTML</a></li>
-      <li><a onclick="fetchPage('css.txt')">CSS</a></li>
-      <li><a onclick="fetchPage('javascript.txt')">JAVASCRIPT</a></li>
+    <h1><a href="#!welcome.txt" onclick="fetchPage('welcome.txt')">WEB</a></h1>
+    <ol id="nav">
+
     </ol>
     <article>
 
@@ -22,6 +21,25 @@
           })
         })
       }
+      if (location.hash) {
+        fetchPage(location.hash.substring(2));
+      }else {
+        fetchPage('welcome.txt');
+      }
+      fetch('list.txt').then(function(response){
+        response.text().then(function(text){
+          var items = text.split(',');
+          var i = 0;
+          var tags = '';
+          while (i<items.length) {
+            var item = items[i].trim();
+            var tag = '<li><a href="#!'+item+'" onclick="fetchPage(\''+item+'.txt\')">' + item + '</a></li>';
+            tags += tag;
+             i++;
+          }
+          document.querySelector('#nav').innerHTML = tags;
+        })
+      });
     </script>
   </body>
 </html>
